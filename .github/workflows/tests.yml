@@ -2,7 +2,7 @@ name: Run MAUI Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, release ]
   pull_request:
     branches: [ main ]
 
@@ -19,11 +19,5 @@ jobs:
       with:
         dotnet-version: 8.0.x
         
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
-    - name: Run tests
-      run: dotnet test ./TestCore/TestCore.csproj --configuration Release --no-build --verbosity normal
+    - name: Run tests directly
+      run: dotnet test ./TestCore/TestCore.csproj --configuration Release

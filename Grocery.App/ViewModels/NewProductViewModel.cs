@@ -13,13 +13,13 @@ namespace Grocery.App.ViewModels
         private string _name = string.Empty;
 
         [ObservableProperty]
-        private int _stock;
+        private string _stock = "";
 
         [ObservableProperty]
         private DateOnly _shelfLife = DateOnly.FromDateTime(DateTime.Today.AddMonths(6));
 
         [ObservableProperty]
-        private decimal _price;
+        private string _price = "";
 
         public NewProductViewModel(IProductService productService)
         {
@@ -35,7 +35,7 @@ namespace Grocery.App.ViewModels
                 return;
             }
 
-            var product = new Product(0, Name, Stock, ShelfLife, Price);
+            var product = new Product(0, Name, Convert.ToInt32(Stock), ShelfLife, Convert.ToDecimal(Price));
             _productService.Add(product);
             await Shell.Current.GoToAsync("..", true);
         }
